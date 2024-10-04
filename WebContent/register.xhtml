@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://java.sun.com/jsf/html"
+ xmlns:f="http://java.sun.com/jsf/core"
+ xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+<h:outputStylesheet library="css" name="register.css" target="body"></h:outputStylesheet>
+</h:head>
+<h:body>
+	<ui:composition template="/resources/template/layout.xhtml">
+		<ui:define name="content">
+			<f:view>
+				<h:form>
+					<h:panelGroup>
+						<h:panelGrid id="panelFields" columns="3" cellpadding="0" cellspacing="2">
+							
+							<h:outputText value="Sexe :"/>
+							<h:selectOneRadio id="sexe" value = "#{userbean.sexe}"> 
+   							<f:selectItem itemValue = "h" itemLabel = "Homme" /> 
+   							<f:selectItem itemValue = "f" itemLabel = "Femme" />
+   							<f:selectItem itemValue = "hc" itemLabel = "Hélicoptère de combat" />
+							</h:selectOneRadio>
+							<h:message for="sexe" style="color:red"/>
+						
+							<h:outputText value="Nom :" />
+							<h:inputText id="nom" value="#{userbean.nom}"
+										size="20" required="true" requiredMessage="Le nom est obligatoire !"
+										validatorMessage="Le nom doit respecter le format suivant : xxxx">
+<!-- 								<f:validateRegex pattern="^\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$" /> -->
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText>
+							<h:message for="nom" style="color:red"/>
+						
+							<h:outputText value="Prénom :" />
+							<h:inputText id="prenom" value="#{userbean.prenom}" 
+										size="20" required="true" requiredMessage="Le prénom est obligatoire !"
+										validatorMessage="Le prénom doit respecter le format suivant : xxxx">
+<!-- 								<f:validateRegex pattern="^\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+$" /> -->
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText>
+							<h:message for="prenom" style="color:red"/>
+							
+							<h:outputText value="Date de naissance :" />
+							<h:inputText id="dateNaissance" value="#{userbean.dateNaissance}" 
+										required="true" requiredMessage="La date de naissance est obligatoire !"
+										validatorMessage="La date de naissance doit respecter le format suivant : 01-01-2000">
+							<f:convertDateTime pattern = "dd-MM-yyyy" />
+							</h:inputText>
+							<h:message for="dateNaissance" style="color:red"/>
+							 
+							
+							<h:outputText value="Email :" />
+							<h:inputText id="email" value="#{userbean.email}" 
+										size="50" required="true" requiredMessage="L'email est obligatoire !"
+										validatorMessage="L'email doit respecter le format suivant : xxxx">
+								<f:validateLength minimum="8" maximum="50"></f:validateLength>
+							</h:inputText>
+							<h:message for="email" style="color:red"/>
+							
+							<h:outputText value="Mot de passe :" />
+							<h:inputSecret id="password" value="#{userbean.password}" 
+										size="20" required="true" requiredMessage="Le mot de passe est obligatoire !"
+										validatorMessage="Le mot de passe doit respecter le format suivant : xxxx">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputSecret>
+							<h:message for="password" style="color:red"/>
+							
+							<h:outputText value="Confirmation :" />
+							<h:inputSecret id="confirmPassword" value="#{userbean.confirmPassword}" 
+										size="20" required="true" requiredMessage="Confirmer le mot de passe !">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputSecret>
+							<h:message for="confirmPassword" style="color:red"/>
+							
+							
+							<br/>
+							<br/>
+							
+							<h:outputText value="Répondez à la question de votre choix :"/>
+							<br/>
+							<h:selectOneMenu value="#{questionbean.texte}"> 
+  								<f:selectItem itemValue = "qu1" itemLabel = "Comment s'appelait ton premier animal ?" /> 
+   								<f:selectItem itemValue = "qu2" itemLabel = "Quel est ton plat préféré ?" /> 
+   								<f:selectItem itemValue = "qu3" itemLabel = "Quel est le prénom de ton père ?" /> 
+							</h:selectOneMenu> 
+														
+							<h:inputText id="reponseQuestion" value="#{questionbean.reponseTexte}" 
+										 required="true" requiredMessage="La réponse doit etre remplie !"
+										>
+							</h:inputText>
+							<h:message for="reponseQuestion" style="color:red"/>
+							
+						</h:panelGrid>
+					</h:panelGroup>
+						<br/>
+					<h:panelGroup>
+						<h:panelGrid id="panelButtons" columns="2" cellpadding="0" cellspacing="2">
+							<h:commandButton id="btnCreerCompte" action="#{userbean.addUser()}" value="Valider" />
+							<h:button id="btnRetour" outcome="index" value="Retour"></h:button>
+						</h:panelGrid>
+					</h:panelGroup>
+					
+					<h:outputText value="#{userbean.errorMessage}" style="color:red" />
+					<h:outputText value="#{userbean.successMessage}" style="color:green" />
+					
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

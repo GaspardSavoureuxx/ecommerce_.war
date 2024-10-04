@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet library="css" name="common-style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+</h:head>
+
+<h:body>
+
+	<f:view>
+
+		<h:form>
+			<h4>Liste des utilisateurs :</h4>
+			<h:dataTable id="dataTable" value="#{userbean.getUsers()}" var="u"
+				styleClass="order-table" headerClass="order-table-header"
+				rowClasses="order-table-odd-row, order-table-even-row">
+
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{u.id}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Genre</f:facet>
+					<h:outputText value="#{u.sexe}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nom</f:facet>
+					<h:outputText value="#{u.nom}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Prenom</f:facet>
+					<h:outputText value="#{u.prenom}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{u.email}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Password</f:facet>
+					<h:outputText value="#{u.password}"></h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Date de naissance</f:facet>
+					<h:outputText value="#{u.dateNaissance}">
+						<f:convertDateTime pattern="dd/mm/yyyy" />
+					</h:outputText>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+
+					<h:panelGrid id="panelDelete" columns="3" cellpadding="0"
+						cellspacing="6">
+						<h:commandLink value="Supprimer"
+							action="#{userBean.deleteUser(u)}"></h:commandLink>
+						<h:commandButton value="Supprimer"
+							action="#{userBean.deleteUser(u)}"></h:commandButton>
+						<h:commandLink action="#{userBean.deleteUser(u)}">
+							<h:graphicImage value="/resources/images/icon-delete.png"
+								alt="Supprimer">
+							</h:graphicImage>
+						</h:commandLink>
+					</h:panelGrid>
+				</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+		<div style="height: 60px;"></div>
+	</f:view>
+</h:body>
+</html>

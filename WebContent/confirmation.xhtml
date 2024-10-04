@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Index</title>
+	<h:outputStylesheet library="css" name="common-style.css" target="body"></h:outputStylesheet>
+</h:head>
+<h:body>
+<ui:composition template="/resources/template/layout.xhtml">
+		<ui:define name="content">
+			<f:view>
+			<h4>Sélectionnez une question de vérification</h4>
+				<h:form>
+					<h:panelGroup>
+						<h:panelGrid id="panelFields" columns="3" cellpadding="0" cellspacing="2">
+
+							
+							<h:selectOneMenu> 
+  								 <f:selectItem itemValue = "qu1" itemLabel = "Quel est ton plat préféré ?" /> 
+   								 <f:selectItem itemValue = "qu2" itemLabel = "Comment s'appelait ton premier animal ?" /> 
+   								 <f:selectItem itemValue = "qu3" itemLabel = "Quel est le prénom de ton père ?" /> 
+							</h:selectOneMenu> 
+							
+							<br/>
+							
+							<h:inputText id="reponseQuestion" value="#{questionbean.texte}" 
+										 required="true" requiredMessage="La réponse doit etre remplie !"
+										>
+							</h:inputText>
+							<h:message for="reponseQuestion" style="color:red"/>
+							
+							
+						</h:panelGrid>
+					</h:panelGroup>
+					<br/>
+					<h:panelGroup>
+						<h:panelGrid id="panelButtons" columns="2" cellpadding="0" cellspacing="2">
+							<h:commandButton id="btnCreerCompte" action="#{userbean.verifyUser()}" value="Valider" />
+						</h:panelGrid>
+					</h:panelGroup>
+					
+					<h:outputText value="#{userbean.errorMessage}" style="color:red" />
+					<h:outputText value="#{userbean.successMessage}" style="color:green" />
+					
+				</h:form>
+			</f:view>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
